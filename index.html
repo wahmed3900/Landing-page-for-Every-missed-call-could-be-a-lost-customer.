@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Never Miss a Lead</title>
+<style>
+:root { color-scheme: light dark; --bg: light-dark(#f6f8fc,#0b1220); --surface: light-dark(#ffffff,#121c2e); --text: light-dark(#101828,#f3f6fc); --muted: light-dark(#5d6b82,#a7b4c9); --line: light-dark(#dce3ee,#2a3850); --blue: #3867f5; --blue2: #244bd0; --mint: #a8f0d1; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+#app { min-height: 100vh; width: 100%; background: var(--bg); }
+nav { max-width: 1160px; margin: auto; padding: 24px 26px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.04em; font-size: 19px; }
+.logo { display: grid; place-items: center; width: 34px; height: 34px; background: var(--blue); color: white; border-radius: 11px; font-weight: 900; }
+.nav-note { color: var(--muted); font-size: 13px; }
+main { max-width: 1160px; margin: auto; padding: 44px 26px 72px; }
+.hero { display: grid; grid-template-columns: 1.06fr .94fr; gap: 56px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: #24b47e; box-shadow: 0 0 0 4px light-dark(#e0f8ed,#163e36); }
+h1 { margin: 22px 0 18px; font-size: clamp(42px,5.5vw,68px); line-height: 1.02; letter-spacing: -.065em; max-width: 650px; }
+h1 span { color: var(--blue); }
+.lead { color: var(--muted); font-size: 18px; line-height: 1.7; max-width: 570px; margin: 0 0 25px; }
+.points { display: grid; gap: 12px; margin: 26px 0 28px; }
+.point { display: flex; gap: 11px; align-items: center; font-size: 14px; font-weight: 650; }
+.check { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: light-dark(#e2f8ed,#153b30); color: light-dark(#08794f,#79e4b3); flex: 0 0 auto; }
+.social-proof { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; }
+.avatars { display: flex; }
+.avatar { display: grid; place-items: center; margin-left: -6px; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--bg); background: light-dark(#dce6ff,#283c63); color: var(--text); font-size: 10px; font-weight: 800; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 30px; box-shadow: 0 22px 65px light-dark(#263e6714,#00000030); }
+.panel-top { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 22px; }
+.panel h2 { font-size: 25px; letter-spacing: -.04em; margin: 0 0 7px; }
+.panel-intro { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0; }
+.pill { white-space: nowrap; font-size: 11px; font-weight: 800; color: light-dark(#08794f,#82e6b6); background: light-dark(#e2f8ed,#153b30); border-radius: 999px; padding: 7px 10px; }
+form { display: grid; gap: 15px; }
+label { display: block; font-size: 12px; font-weight: 750; margin-bottom: 7px; }
+input, select { width: 100%; border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 11px; padding: 13px 14px; font: inherit; font-size: 14px; outline: none; }
+input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px #3867f522; }
+::placeholder { color: var(--muted); }
+button { width: 100%; padding: 15px 18px; border: 0; border-radius: 12px; background: var(--blue); color: white; font: inherit; font-weight: 800; cursor: pointer; transition: background .15s, transform .15s; }
+button:hover { background: var(--blue2); transform: translateY(-1px); }
+.fine { color: var(--muted); font-size: 10px; line-height: 1.6; text-align: center; margin: 0; }
+.fine a { color: var(--muted); }
+.success { display: none; border: 1px solid light-dark(#9adbbd,#236a50); background: light-dark(#effbf4,#102b24); color: light-dark(#126642,#9aebc5); padding: 13px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+.success.show { display: block; }
+.trust-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 72px; }
+.trust { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: light-dark(#ffffff8c,#121c2e8c); }
+.trust strong { display: block; font-size: 15px; margin-bottom: 7px; }
+.trust p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0; }
+footer { max-width: 1160px; margin: auto; padding: 0 26px 28px; color: var(--muted); font-size: 11px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+@media (max-width: 800px) { main { padding-top: 24px; } .hero { grid-template-columns: 1fr; gap: 32px; } h1 { font-size: clamp(42px,10vw,62px); } .panel { padding: 24px; } .trust-row { grid-template-columns: 1fr; margin-top: 40px; } .nav-note { display: none; } }
+</style>
+</head>
+<body>
+<div id="app">
+<nav><div class="brand"><div class="logo">↗</div> LeadLoop AI</div><div class="nav-note">AI-powered missed-call follow-up for small businesses</div></nav>
+<main>
+<section class="hero">
+<div>
+<div class="eyebrow"><span class="dot"></span> Turn missed calls into new opportunities</div>
+<h1>Every missed call could be a <span>lost customer.</span></h1>
+<p class="lead">Give every new lead a faster response. Explore an AI assistant that can help your business follow up, capture contact details, and keep opportunities from slipping through the cracks.</p>
+<div class="points">
+<div class="point"><span class="check">✓</span> Capture interested prospects in one simple form</div>
+<div class="point"><span class="check">✓</span> Explore faster follow-up workflows</div>
+<div class="point"><span class="check">✓</span> Get a walkthrough tailored to your business</div>
+</div>
+<div class="social-proof"><div class="avatars"><span class="avatar">SM</span><span class="avatar">HV</span><span class="avatar">LC</span></div><span>Built for service businesses that want to respond faster.</span></div>
+</div>
+<aside class="panel">
+<div class="panel-top"><div><h2>Get a free demo</h2><p class="panel-intro">Tell us where to reach you. We’ll follow up about your business needs.</p></div><span class="pill">FREE DEMO</span></div>
+<form id="leadForm">
+<div><label for="name">Your name *</label><input id="name" name="name" autocomplete="name" placeholder="Alex Morgan" required></div>
+<div><label for="contact">Email or phone number *</label><input id="contact" name="contact" autocomplete="email" placeholder="you@business.com or (555) 123-4567" required></div>
+<div><label for="business">Business type</label><select id="business" name="business"><option value="">Select your industry</option><option>Home services</option><option>Auto services</option><option>Healthcare / wellness</option><option>Real estate</option><option>Professional services</option><option>Other</option></select></div>
+<button type="submit">Request My Free Demo →</button>
+<div class="success" id="success" role="status">Thanks! This preview has validated your form. To actually receive leads, connect the form to an email service, CRM, or backend before publishing.</div>
+<p class="fine">By submitting, you agree to be contacted about this request. Don’t enter sensitive personal information. Add your privacy policy and any required SMS consent language before going live.</p>
+</form>
+</aside>
+</section>
+<section class="trust-row">
+<div class="trust"><strong>📞 Respond sooner</strong><p>Design a follow-up flow for people who call when you’re busy or unavailable.</p></div>
+<div class="trust"><strong>⚡ Simple lead capture</strong><p>Collect the contact details you need to continue the conversation.</p></div>
+<div class="trust"><strong>🤝 Built around your business</strong><p>Start with a short demo and identify where automation could save time.</p></div>
+</section>
+</main>
+<footer><span>© 2026 LeadLoop AI · Landing page concept</span><span>Preview only — connect a secure lead destination before publishing.</span></footer>
+</div>
+<script>
+document.getElementById('leadForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  if (!name || !contact) return;
+  document.getElementById('success').classList.add('show');
+});
+</script>
+</body>
+</html>
